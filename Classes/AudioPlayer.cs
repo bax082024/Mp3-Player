@@ -9,6 +9,7 @@ class AudioPlayer
   private AudioFileReader? audioFile;
   private string[] playlist;
   private int currentTrackIndex;
+  private bool isPaused;
 
   public AudioPlayer(string? folderPath) 
   {
@@ -18,6 +19,7 @@ class AudioPlayer
     }
     playlist = Directory.GetFiles(folderPath, "*.mp3"); 
     currentTrackIndex = 0;
+    isPaused = false;
   }
 
   public void Play()
@@ -27,8 +29,16 @@ class AudioPlayer
       Console.WriteLine("No Mp3 Files Found.");
       return;
     }
+    if (isPaused)
+    {
+      Resume();
+    }
+    else
+    {
+      PlayTrack(currentTrackIndex);
+    }
 
-    PlayTrack(currentTrackIndex);
+    
   }
 
   private void PlayTrack(int trackIndex)
@@ -49,6 +59,16 @@ class AudioPlayer
 
     Console.WriteLine($"Playing: {Path.GetFileName(playlist[trackIndex])}");
     outputDevice.PlaybackStopped += OnPlaybackStopped;
+  }
+
+  public void Pause()
+  {
+    if (outputDevice != null && outputDevice.PlaybackState == PlaybackState.Playing)
+    {
+      outputDevice.Pause();
+      isPaused = true;
+      Console.WriteLine("Paused");
+    }
   }
 
   private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
