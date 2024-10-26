@@ -105,10 +105,7 @@ class AudioPlayer
     PlayTrack(currentTrackIndex);
   }
 
-  public void Stop()
-  {
-    outputDevice?.Stop();
-  }
+  
 
 
   

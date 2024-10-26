@@ -12,7 +12,7 @@
 
     AudioPlayer player = new AudioPlayer(folderPath);
 
-    Console.WriteLine("Press 'P' to play, 'S' to stop, or 'Q' to quit");
+    Console.WriteLine("Press 'P' to play/resume, 'S' to stop, 'A' to pause, 'B' for previous track, 'Q' to quit");
 
     while (true)
     {
