@@ -5,6 +5,11 @@
     Console.WriteLine("Enter music folder path:");
     string folderPath = Console.ReadLine();
 
+    if (string.IsNullOrEmpty(folderPath) || !Directory.Exists(folderPath))
+    {
+      Console.WriteLine("Invalid folder path.")
+    }
+
     AudioPlayer player = new AudioPlayer(folderPath);
 
     Console.WriteLine("Press 'P' to play, 'S' to stop, or 'Q' to quit");
