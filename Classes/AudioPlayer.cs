@@ -10,6 +10,7 @@ class AudioPlayer
   private string[] playlist;
   private int currentTrackIndex;
   private bool isPaused;
+  private bool isSwitchingTracks = false;
 
   public AudioPlayer(string? folderPath) 
   {
@@ -89,20 +90,27 @@ class AudioPlayer
 
   public void NextTrack()
   {
+    isSwitchingTracks = true;
     currentTrackIndex = (currentTrackIndex + 1) % playlist.Length;
     PlayTrack(currentTrackIndex);
+    isSwitchingTracks = false;
   }
 
   public void PreviousTrack()
   {
+    isSwitchingTracks = true;
     currentTrackIndex = (currentTrackIndex - 1 + playlist.Length) % playlist.Length;
     PlayTrack(currentTrackIndex);
+    isSwitchingTracks = false;
   }
 
   private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
   {
-    currentTrackIndex = (currentTrackIndex + 1) % playlist.Length;
-    PlayTrack(currentTrackIndex);
+    if (!isSwitchingTracks)
+    { 
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.Length;
+      PlayTrack(currentTrackIndex);
+    }
   }
 
   
