@@ -26,6 +26,18 @@
       {
         player.Stop();
       }
+      else if (key == ConsoleKey.A)
+      {
+        player.Pause();
+      }
+      else if (key == ConsoleKey.N)
+      {
+        player.NextTrack();
+      }
+      else if (key == ConsoleKey.B)
+      {
+        player.PreviousTrack();
+      }
       else if (key == ConsoleKey.Q)
       {
         player.Stop();
