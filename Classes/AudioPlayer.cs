@@ -81,6 +81,12 @@ class AudioPlayer
     }
   }
 
+  public void Stop()
+  {
+    outputDevice?.Stop();
+    isPaused = false;
+  }
+
   private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
   {
     currentTrackIndex = (currentTrackIndex + 1) % playlist.Length;
