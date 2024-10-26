@@ -3,11 +3,11 @@
   static void Main(string[] args)
   {
     Console.WriteLine("Enter music folder path:");
-    string folderPath = Console.ReadLine();
+    string? folderPath = Console.ReadLine();
 
     if (string.IsNullOrEmpty(folderPath) || !Directory.Exists(folderPath))
     {
-      Console.WriteLine("Invalid folder path.")
+      Console.WriteLine("Invalid folder path.");
     }
 
     AudioPlayer player = new AudioPlayer(folderPath);

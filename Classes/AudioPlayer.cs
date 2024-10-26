@@ -10,9 +10,14 @@ class AudioPlayer
   private string[] playlist;
   private int currentTrackIndex;
 
-  public AudioPlayer(string folderPath) 
+  public AudioPlayer(string? folderPath) 
   {
-    playlist = Directory.GetFiles(folderPath, "*.mp3");
+    if (string.IsNullOrEmpty(folderPath) || !Directory.Exists(folderPath))
+    {
+      throw new ArgumentException("Invalid folder path");
+    }
+    playlist = Directory.GetFiles(folderPath, "*.mp3"); 
+    currentTrackIndex = 0;
   }
 
   public void Play()
@@ -30,7 +35,10 @@ class AudioPlayer
   {
     if (outputDevice != null)
     {
-      outputDevice.Dispose();
+      outputDevice.Dispose(); 
+    }
+    if (audioFile != null)
+    {
       audioFile.Dispose();
     }
 
@@ -43,7 +51,7 @@ class AudioPlayer
     outputDevice.PlaybackStopped += OnPlaybackStopped;
   }
 
-  private void OnPlaybackStopped(object sender, StoppedEventArgs e)
+  private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
   {
     currentTrackIndex = (currentTrackIndex + 1) % playlist.Length;
     PlayTrack(currentTrackIndex);
