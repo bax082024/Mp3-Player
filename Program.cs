@@ -1,52 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using NAudio.Wave;
-
-class AudioPlayer
+﻿class Program
 {
-  private WaveOutEvent outputDevice;
-  private AudioFileReader audioFile;
-  private string[] playlist;
-  private int currentTrackIndex;
-
-  public AudioPlayer(string folderPath) 
+  static void Main(string[] args)
   {
-    playlist = Directory.GetFiles(folderPath, "*.mp3");
+    Console.WriteLine("Enter music folder path:");
+    string folderPath = Console.ReadLine();
+
+    AudioPlayer player = new AudioPlayer(folderPath);
+
+    Console.WriteLine("Press 'P' to play, 'S' to stop, or 'Q' to quit");
+
+    
   }
-
-  public void Play()
-  {
-    if (playlist.Length == 0)
-    {
-      Console.WriteLine("No Mp3 Files Found.");
-      return;
-    }
-
-    PlayTrack(currentTrackIndex);
-  }
-  private void PlayTrack(int trackIndex)
-  {
-    if (outputDevice != null)
-    {
-      outputDevice.Dispose();
-      audioFile.Dispose();
-    }
-
-    audioFile = new AudioFileReader(playlist[trackIndex]);
-    outputDevice = new WaveOutEvent();
-    outputDevice.Init(audioFile);
-    outputDevice.Play();
-
-    Console.WriteLine($"Playing: {Path.GetFileName(playlist[trackIndex])}");
-    outputDevice.PlaybackStopped += OnPlaybackStopped;
-  }
-
-  public void Stop()
-  {
-    outputDevice?.Stop();
-  }
-
-
-  
 }
