@@ -5,8 +5,8 @@ using NAudio.Wave;
 
 class AudioPlayer
 {
-  private WaveOutEvent outputDevice;
-  private AudioFileReader audioFile;
+  private WaveOutEvent? outputDevice;
+  private AudioFileReader? audioFile;
   private string[] playlist;
   private int currentTrackIndex;
 
@@ -25,6 +25,7 @@ class AudioPlayer
 
     PlayTrack(currentTrackIndex);
   }
+
   private void PlayTrack(int trackIndex)
   {
     if (outputDevice != null)
@@ -40,6 +41,12 @@ class AudioPlayer
 
     Console.WriteLine($"Playing: {Path.GetFileName(playlist[trackIndex])}");
     outputDevice.PlaybackStopped += OnPlaybackStopped;
+  }
+
+  private void OnPlaybackStopped(object sender, StoppedEventArgs e)
+  {
+    currentTrackIndex = (currentTrackIndex + 1) % playlist.Length;
+    PlayTrack(currentTrackIndex);
   }
 
   public void Stop()
