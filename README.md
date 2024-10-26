@@ -3,7 +3,7 @@
 
 ## Introduction
 - Wanted to try to make an audio player, nice to have.
-
+- It has play, pause, next, back and stop functions.
 
 
 ### How to use
