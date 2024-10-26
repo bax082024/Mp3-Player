@@ -25,19 +25,27 @@ class AudioPlayer
 
     PlayTrack(currentTrackIndex);
   }
-    private void PlayTrack(int trackIndex)
+  private void PlayTrack(int trackIndex)
+  {
+    if (outputDevice != null)
     {
-      if (outputDevice != null)
-      {
-        outputDevice.Dispose();
-        audioFile.Dispose();
-      }
-
-      audioFile = new AudioFileReader(playlist[trackIndex]);
-      outputDevice = new WaveOutEvent();
-      outputDevice.Init(audioFile);
-      outputDevice.Play();
+      outputDevice.Dispose();
+      audioFile.Dispose();
     }
+
+    audioFile = new AudioFileReader(playlist[trackIndex]);
+    outputDevice = new WaveOutEvent();
+    outputDevice.Init(audioFile);
+    outputDevice.Play();
+
+    Console.WriteLine($"Playing: {Path.GetFileName(playlist[trackIndex])}");
+    outputDevice.PlaybackStopped += OnPlaybackStopped;
+  }
+
+  public void Stop()
+  {
+    outputDevice?.Stop();
+  }
 
 
   
