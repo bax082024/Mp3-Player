@@ -71,6 +71,16 @@ class AudioPlayer
     }
   }
 
+  public void Resume()
+  {
+    if (outputDevice != null && outputDevice.PlaybackState == PlaybackState.Paused)
+    {
+      outputDevice.Play();
+      isPaused = false;
+      Console.WriteLine("Resume");
+    }
+  }
+
   private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
   {
     currentTrackIndex = (currentTrackIndex + 1) % playlist.Length;
