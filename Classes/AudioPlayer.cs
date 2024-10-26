@@ -84,8 +84,29 @@ class AudioPlayer
 
   public void Stop()
   {
-    outputDevice?.Stop();
+    if (outputDevice != null && outputDevice.PlaybackState == PlaybackState.Playing)
+    {
+      outputDevice.PlaybackStopped -= OnPlaybackStopped;
+
+      if (outputDevice.PlaybackState == PlaybackState.Playing || outputDevice.PlaybackState == PlaybackState.Paused)
+      {
+        outputDevice.Stop();
+      }
+
+      outputDevice.Dispose();
+      outputDevice = null;
+    }
+    if (audioFile != null)
+    {
+      audioFile.Dispose();
+      audioFile = null;
+    }
+
     isPaused = false;
+    isSwitchingTracks = false;
+    Console.WriteLine("Playback Stopped");
+    
+    
   }
 
   public void NextTrack()
