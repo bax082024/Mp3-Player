@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4A1JiAhgGE4=",
+  "dgSpecHash": "iuVp5rXzcOU=",
   "success": true,
-  "projectFilePath": "C:\\HjemmeKode\\C-Sharp\\C-Sharp\\SimpleAudioPlayer\\SimpleAudioPlayer.csproj",
+  "projectFilePath": "C:\\Users\\busch\\Documents\\projects\\MP3-Player\\mp3-player\\SimpleAudioPlayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\busch\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\busch\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
